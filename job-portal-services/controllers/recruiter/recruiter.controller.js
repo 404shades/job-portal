@@ -11,21 +11,19 @@ exports.registerRecruiter = async (request, response, next) => {
       email,
       recuiter_name,
       password,
-      website,
-      phone_number,
+      
+      
     } = request.body;
-    const recruiter = await RecruiterRepository.createNewRecruiter({
+    const {recruiter} = await RecruiterRepository.createNewRecruiter({
       company_name,
       email,
       recuiter_name,
-      password,
-      website,
-      phone_number,
+      password
     });
     const token = jwt.sign(
       { id: recruiter.id },
       environment.JSON_WEB_TOKEN_PASSWORD,
-      { expiresIn: 86400 }
+      { expiresIn: 864000 }
     );
     return response
       .status(201)
@@ -51,12 +49,12 @@ exports.signInRecruiter = async (request, response, next) => {
     else{
         const isValidUser = await RecruiterRepository.isPasswordValid(recruiter,password);
         if(!isValidUser){
-            throw Error("Wrong Credentials")
+            throw new Error("Wrong Credentials")
         }
         const token = jwt.sign(
             { id: recruiter.id },
             environment.JSON_WEB_TOKEN_PASSWORD,
-            { expiresIn: 86400 }
+            { expiresIn: 864000 }
           );
         return response.status(200).json(apiResponse({recruiter,accessToken:token},response.statusCode,"Welcome!!!"))
     }

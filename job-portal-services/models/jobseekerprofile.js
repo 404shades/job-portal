@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     gender: DataTypes.STRING,
     cv_path: DataTypes.STRING,
     date_of_birth: DataTypes.DATE,
-    phone: {type:DataTypes.STRING,allowNull:false},
-    short_description: {type:DataTypes.TEXT,allowNull:false}
+    phone: {type:DataTypes.STRING},
+    short_description: {type:DataTypes.TEXT}
   }, {
     sequelize,
     modelName: 'JobSeekerProfile',

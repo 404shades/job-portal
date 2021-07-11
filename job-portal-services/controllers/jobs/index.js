@@ -2,12 +2,15 @@ const { apiResponse } = require("../../utils/response_api");
 const JobRepository = require("../../repositories/jobs");
 exports.createJob = async (request, response, next) => {
   try {
-    const { job_description, job_title } = request.body;
+    const { job_description, job_title, last_date_to_apply,JobCategoryId } = request.body;
     const { recruiterDetails } = request;
+    const RecruiterId = recruiterDetails.id;
     const job = await JobRepository.createNewJob({
       job_description,
       job_title,
-      created_by: recruiterDetails.id,
+      last_date_to_apply,
+      JobCategoryId,
+      RecruiterId
     });
 
     return response

@@ -28,12 +28,8 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false,
     },
-    is_active:DataTypes.BOOLEAN,
+    is_active:{type:DataTypes.BOOLEAN,defaultValue:true},
     last_date_to_apply:DataTypes.DATE,
-    created_by:{
-      type:DataTypes.UUID,
-      allowNull:false
-    }
   }, {
     sequelize,
     modelName: 'Jobs',

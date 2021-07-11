@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt = require("bcrypt");
+const PROTECTED_ATTRIBUTES = ['password']
+
 
 const generateHashPassword = (user) => {
   if (user === null) {

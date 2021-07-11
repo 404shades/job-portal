@@ -1,8 +1,10 @@
 const Recruiter  = require("../../models").sequelize.models.Recruiter;
-'use strict';
+const RecruiterProfile  = require("../../models").sequelize.models.RecruiterProfile
 const RecruiterRepository = {
-    createNewRecruiter : async function(recruiter){
-        return await Recruiter.create(recruiter)
+    createNewRecruiter : async function(recruiterDetails){
+        const recruiter = await Recruiter.create(recruiterDetails);
+        const recruiterProfile = await RecruiterProfile.create({RecruiterId:recruiter.id})
+        return {recruiter,recruiterProfile}
     },
     findRecruiterById:async function(uuid) {
         return await Recruiter.findByPk(uuid)
