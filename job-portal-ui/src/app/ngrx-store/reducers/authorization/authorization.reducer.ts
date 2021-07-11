@@ -4,6 +4,12 @@ import {
   LOGIN_JOB_SEEKER_SUCCESS,
   LOGIN_RECRUITER_SUCCESS,
   RecruiterAuthActions,
+  REFRESH_JOB_SEEKER_TOKEN_FAIL,
+  REFRESH_JOB_SEEKER_TOKEN_SUCCESS,
+  REFRESH_RECRUITER_TOKEN,
+  REFRESH_RECRUITER_TOKEN_SUCCESS,
+  REGISTER_JOB_SEEKER_SUCCESS,
+  REGISTER_RECRUITER_SUCCESS,
 } from '../../actions/authorization';
 
 export interface UserProfileState {
@@ -25,9 +31,35 @@ export function authReducer(
 ): UserProfileState {
   switch (action.type) {
     case LOGIN_RECRUITER_SUCCESS:
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload,loggedIn:true };
     case LOGIN_JOB_SEEKER_SUCCESS:
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload,loggedIn:true };
+    case REGISTER_RECRUITER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        loggedIn:true
+      };
+    case REGISTER_JOB_SEEKER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        loggedIn:true
+      };
+
+      case REFRESH_JOB_SEEKER_TOKEN_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        loggedIn:true
+      };
+
+      case REFRESH_RECRUITER_TOKEN_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        loggedIn:true
+      };
 
     default:
       return state;
@@ -35,3 +67,5 @@ export function authReducer(
 }
 
 export const selectUser = (state: UserProfileState) => state.user;
+export const selectLoggedInStatus = (state:UserProfileState)=>state.loggedIn;
+export const selectRecruiterStatus = (state:UserProfileState)=>state.user?.isRecruiter

@@ -10,3 +10,16 @@ body {
     font-family: $font;
     font-size: 18px;
 }
+
+.modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    h4 {
+        margin: 0;
+    }
+    i {
+        cursor: pointer;
+    }
+}

@@ -28,6 +28,8 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
+            console.log("SABNSBAn")
+
           let baseResponseModel: BaseResponseModel =
             event.body as BaseResponseModel;
           if (
@@ -46,7 +48,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               url: event.url!,
             });
           }
-
           if (baseResponseModel.messages) {
             if (
               baseResponseModel.messages.errorMessage
@@ -71,6 +72,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
+          console.log(error)
         this.toastService.error(error.error);
         return throwError(error.error);
         // return throwError(error.error);

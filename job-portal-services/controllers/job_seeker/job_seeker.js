@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const environment = require("../../env-vars");
 const { apiResponse } = require("../../utils/response_api");
 const create_error = require("../../utils/create_error");
+const { response } = require("express");
 
 exports.registerJobSeeker = async (request, response, next) => {
   try {
@@ -22,7 +23,7 @@ exports.registerJobSeeker = async (request, response, next) => {
       .status(201)
       .json(
         apiResponse(
-          { jobSeeker,isRecruiter:false, accessToken: token },
+          { userData: jobSeeker, isRecruiter: false, accessToken: token },
           "User Registered Successfully"
         )
       );
@@ -54,7 +55,7 @@ exports.signInJobSeeker = async (request, response, next) => {
         .status(200)
         .json(
           apiResponse(
-            { jobSeeker,isRecruiter:false, accessToken: token },
+            { userData: jobSeeker, isRecruiter: false, accessToken: token },
             response.statusCode,
             "Welcome!!!"
           )
@@ -63,31 +64,43 @@ exports.signInJobSeeker = async (request, response, next) => {
   } catch (e) {
     next(create_error("Wrong Credentials", 403));
   }
-
-  
 };
 
+exports.signInJobSeekerThroughToken = async (request, response, next) => {
+  try {
+    const jobSeekerDetails = { request };
+    return response
+      .status(200)
+      .json(
+        { userData: jobSeekerDetails, isRecruiter: false, accessToken: token },
+        response.statusCode,
+        "Welcome!!!"
+      );
+  } catch (e) {
+    next(e);
+  }
+};
 
 exports.applyJob = async (request, response, next) => {
-    try {
-      const JobSeekerId = request.id;
-      const { JobId } = request.body;
+  try {
+    const JobSeekerId = request.id;
+    const { JobId } = request.body;
 
-      const jobApplication =
-        await JobApplicationRepository.createNewJobApplication({
-          JobSeekerId,
-          JobId,
-        });
-      return response
-        .status(201)
-        .json(
-          apiResponse(
-            jobApplication,
-            response.statusCode,
-            "Successfully Applied to this Job"
-          )
-        );
-    } catch (e) {
-      next(e);
-    }
-  };
+    const jobApplication =
+      await JobApplicationRepository.createNewJobApplication({
+        JobSeekerId,
+        JobId,
+      });
+    return response
+      .status(201)
+      .json(
+        apiResponse(
+          jobApplication,
+          response.statusCode,
+          "Successfully Applied to this Job"
+        )
+      );
+  } catch (e) {
+    next(e);
+  }
+};

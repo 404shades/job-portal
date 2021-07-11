@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CategoryData } from 'src/app/core/data-models/JobCategories';
+import { StoreService } from 'src/app/core/services/store/store.service';
 import { JobServiceDataModel } from 'src/app/modules/recruiters-panel/data/job-services/job-services.model';
 
 @Component({
@@ -8,18 +11,13 @@ import { JobServiceDataModel } from 'src/app/modules/recruiters-panel/data/job-s
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private storeService:StoreService) { }
 
-  availableJobServices:JobServiceDataModel[] = [
-    {title:'PHp',count:12},
-    {title:'PHp',count:12},
-    {title:'PHp',count:12},
-    {title:'PHp',count:12},
-    {title:'PHp',count:12}, {title:'PHp',count:12},
-    {title:'PHp',count:12}
-  ]
+  availableJobServices:Observable<CategoryData[]>|undefined
 
   ngOnInit(): void {
+    this.availableJobServices =  this.storeService.getAllJobCategories$
+    this.storeService.getAllCategorires()
   }
 
 }

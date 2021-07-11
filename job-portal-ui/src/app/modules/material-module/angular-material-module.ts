@@ -17,6 +17,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 import {
   DateAdapter,
   MatNativeDateModule,
@@ -36,6 +38,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSelectModule,
     MatRadioModule,
     MatIconModule,
+    MatToolbarModule,
     MatFormFieldModule,
     MatButtonModule,
     MatDialogModule,

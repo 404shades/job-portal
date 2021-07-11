@@ -1,0 +1,42 @@
+<div class="modal-head">
+  <h4>Register As Recruiter</h4>
+  <i class="material-icons" (click)="closeDialog()">close</i>
+</div>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="registerFormGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter Company Name</mat-label>
+      <input matInput formControlName="company_name" placeholder="Company Name"/>
+      <mat-error>
+        Please provide a valid company Name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Enter Company Email</mat-label>
+        <input matInput formControlName="email" placeholder="Company Email"/>
+        <mat-error>
+          Please provide a valid company email
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Enter Representative Name</mat-label>
+        <input matInput formControlName="recuiter_name" placeholder="Representative Name"/>
+        <mat-error>
+          Please provide a valid recruiter name
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Enter Password</mat-label>
+        <input matInput formControlName="password" placeholder="Password" type="password"/>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button (click)="submitForm()" mat-raised-button color="primary" [disabled]="!registerFormGroup.valid">Register</button>
+</mat-dialog-actions>

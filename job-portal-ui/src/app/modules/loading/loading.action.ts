@@ -9,17 +9,17 @@ export enum ActionTypes {
 
 export class Add implements Action, Partial<LoadingAction> {
   readonly type = ActionTypes.Add;
-  dreamTeamLoading: { add: string };
+  jobPortalLoading: { add: string };
   constructor(add: string) { 
-    this.dreamTeamLoading = { add };
+    this.jobPortalLoading = { add };
   }
 }
 
 export class Remove implements Action, Partial<LoadingAction> {
   readonly type = ActionTypes.Remove;
-  dreamTeamLoading: { remove: string };
+  jobPortalLoading: { remove: string };
   constructor(remove: string) {
-    this.dreamTeamLoading = { remove };
+    this.jobPortalLoading = { remove };
   }
 }
 

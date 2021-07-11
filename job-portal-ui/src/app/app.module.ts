@@ -11,6 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { getBaseUrl } from './core/providers/base_url';
 import { reducers,metaReducers } from './ngrx-store';
 import { LoadingModule } from './modules/loading';
+import { allHttpInterceptorProviders } from './core/interceptors/interceptors';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { CoreModule } from './core/core.module';
+import { HttpClientModule } from '@angular/common/http';
+import { effects } from './ngrx-store/effects';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,16 +27,27 @@ import { LoadingModule } from './modules/loading';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
+    SharedModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     LoadingModule,
-    EffectsModule.forRoot([]),
-    BrowserAnimationsModule
+    EffectsModule.forRoot(effects),
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+    HttpClientModule,
+    CoreModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: "toast-bottom-right",
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     { provide: "BASE_API_URL", useFactory: getBaseUrl, deps: [] },
+    ...allHttpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

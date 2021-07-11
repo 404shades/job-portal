@@ -1,5 +1,5 @@
 export interface UserAuthData {
-    recruiter?:   UserData;
+    userData?:   UserData;
     isRecruiter?: boolean;
     accessToken?: string;
 }

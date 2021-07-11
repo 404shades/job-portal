@@ -1,0 +1,34 @@
+<mat-toolbar color="primary" class="expanded-toolbar">
+    <span>Login To Job Portal</span>
+    
+  </mat-toolbar>
+
+  <h2 class="text-center py-3">Welcome to Job Portal, Login here</h2>
+
+  <mat-card class="login-box">
+    <mat-card-content>
+      <form [formGroup]="loginForm">
+        <h2>Log In</h2>
+        <mat-error *ngIf="loginInvalid">
+          The username and password were not recognized
+        </mat-error>
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" required>
+          <mat-error>
+            Please provide a valid email address
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <mat-error>
+            Please provide a valid password
+          </mat-error>
+        </mat-form-field>
+        <mat-slide-toggle formControlName="isRecruiter" >Are you a recruiter?</mat-slide-toggle>
+        <br>
+        <button class="mx-3" [disabled]="!loginForm.valid" (click)="loginUser()" mat-raised-button color="primary">Login</button>
+        <button type="button" mat-raised-button color="primary" routerLink="/register">Dont have an Account? Register</button>
+        
+      </form>
+    </mat-card-content>
+  </mat-card>

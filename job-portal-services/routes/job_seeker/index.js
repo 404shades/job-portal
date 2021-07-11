@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post("/register",jobSeekerController.registerJobSeeker)
 router.post("/login",jobSeekerController.signInJobSeeker)
+router.post("/loginThroughToken",jwtAuthMiddleware,isJobSeeker,jobSeekerController.signInJobSeekerThroughToken)
 
 router.post("/applyJob",jwtAuthMiddleware,isJobSeeker,jobSeekerController.applyJob)
 

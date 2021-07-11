@@ -4,9 +4,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
     {
-        path:'dashboard',
-        component:DashboardComponent
-    }
+        path:'',
+        component:DashboardComponent,
+        pathMatch:'full'
+    },
+    
+   
 ];
 
 @NgModule({

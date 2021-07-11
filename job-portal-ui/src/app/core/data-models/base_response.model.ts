@@ -1,8 +1,9 @@
+import { CategoryData } from "./JobCategories";
 import { UserAuthData } from "./UserAuthorization/user_authorization";
 
 export interface BaseResponseModel {
     doLogout?:   boolean;
-    response?:   UserAuthData;
+    response?:   UserAuthData|CategoryData[];
     statusCode?: number;
     messages?:   Messages;
 }

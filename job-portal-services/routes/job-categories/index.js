@@ -6,6 +6,6 @@ const router = express.Router();
 
 
 router.get("/addFakeCategories",jobCategoryController.addFakeJobcategories);
-router.get("/allAvailableCategories",jwtAuthMiddleware,jobCategoryController.getAllAvailableCategories)
+router.get("/allAvailableCategories",jobCategoryController.getAllAvailableCategories)
 
 module.exports  = router;

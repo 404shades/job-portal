@@ -1,0 +1,16 @@
+.expanded-toolbar {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .login-box{
+    margin: auto;
+    margin-top: 10%;
+    width: 50%;
+}
+mat-form-field{
+    display: block;
+  }
+
+  mat-slide-toggle{
+      display: block;
+  }

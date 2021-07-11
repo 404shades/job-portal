@@ -1,0 +1,36 @@
+<div class="modal-head">
+    <h4>Register As Job Seeker</h4>
+    <i class="material-icons" (click)="closeDialog()">close</i>
+  </div>
+  
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="registerFormGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter Full Name</mat-label>
+        <input matInput formControlName="full_name" placeholder="Full Name"/>
+        <mat-error>
+          Please provide a valid Name
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+          <mat-label>Enter Your Email</mat-label>
+          <input matInput formControlName="email" placeholder="Your Email"/>
+          <mat-error>
+            Please provide a valid email
+          </mat-error>
+        </mat-form-field>
+  
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Enter Password</mat-label>
+          <input matInput formControlName="password" placeholder="Password" type="password"/>
+          <mat-error>
+            Please provide a valid password
+          </mat-error>
+        </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+      <button (click)="submitForm()" mat-raised-button color="primary" [disabled]="!registerFormGroup.valid">Register</button>
+  </mat-dialog-actions>
+  

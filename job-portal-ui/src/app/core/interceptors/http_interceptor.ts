@@ -30,14 +30,17 @@ export class BaseHttpInterceptor implements HttpInterceptor {
     return this.storeService.getLoggedInUser$.pipe(
       take(1),
       concatMap((userProfile) => {
-        let tokenData: string | undefined = undefined;
-           if (!req.headers.has(DO_NOT_ADD_TOKEN)) {
-            tokenData = userProfile?.accessToken
-            if (!tokenData) {
-              this.authorizationService.logoutUser();
-              return throwError("Token Data not found");
-            }
+        let tokenData: string | undefined | null = undefined;
+        if (req.headers.has('AuthorizationToken')) {
+          tokenData = req.headers.get('AuthorizationToken');
+        }
+        if (!req.headers.has(DO_NOT_ADD_TOKEN)) {
+          tokenData = userProfile?.accessToken;
+          if (!tokenData) {
+            this.authorizationService.logoutUser();
+            return throwError('Token Data not found');
           }
+        }
         const apiReq = req.clone({
           url: `${this.baseUrl}/${req.url}`,
           headers: req.headers
@@ -46,7 +49,8 @@ export class BaseHttpInterceptor implements HttpInterceptor {
               'user_agent',
               'web-' + window.navigator.userAgent.substr(0, 76)
             )
-            .delete(DO_NOT_ADD_TOKEN),
+            .delete(DO_NOT_ADD_TOKEN)
+            .delete("AuthorizationToken")
         });
         return next.handle(apiReq);
       })

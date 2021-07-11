@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { StoreService } from '../services/store/store.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn$:Observable<boolean>|undefined;
+  isRecruiter$:Observable<boolean|undefined>|undefined;
+
+  constructor(private storeService:StoreService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn$ = this.storeService.isLoggedIn$;
+    this.isRecruiter$ = this.storeService.isRecruiter$;
   }
 
 }
