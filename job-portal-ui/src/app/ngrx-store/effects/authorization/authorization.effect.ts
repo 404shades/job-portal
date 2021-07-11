@@ -97,7 +97,7 @@ export class AuthorizationEffetcs {
       mergeMap((dialogData: DialogData) =>
         dialogData && dialogData.status
           ? this.authorizationService
-              .registerRecruiter(dialogData.data as RegisterJobSeekerRequest)
+              .registerJobSeeker(dialogData.data as RegisterJobSeekerRequest)
               .pipe(
                 map(
                   (data) => new fromAuthActions.RegisterJobSeekerSuccess(data)

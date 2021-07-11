@@ -39,7 +39,7 @@ export class AuthHttpService {
   ): Observable<UserAuthData> {
     return this.httpClient
       .post<BaseResponseModel>(
-        RECRUITER_REGISTER_ENDPOINT,
+        JOB_SEEKER_REGISTER_ENDPOINT,
         registerAuthRequest,
         {
           headers: {
@@ -67,7 +67,8 @@ export class AuthHttpService {
     return this.httpClient
       .post<BaseResponseModel>(RECRUITER_REFRESH_TOKEN, {},{
         headers:{
-          'AuthorizationToken': accessToken
+          'AuthorizationToken': accessToken,
+          [DO_NOT_ADD_TOKEN]:"true"
         }
       })
       .pipe(map((data) => data.response as UserAuthData));
@@ -76,7 +77,8 @@ export class AuthHttpService {
   refreshJobSeekerToken(accessToken:string): Observable<UserAuthData> {
     return this.httpClient
       .post<BaseResponseModel>(JOB_SEEKER_REFRESH_TOKEN, {},{headers:{
-        'AuthorizationToken': accessToken
+        'AuthorizationToken': accessToken,
+        [DO_NOT_ADD_TOKEN]:"true"
       }})
       .pipe(map((data) => data.response as UserAuthData));
   }
@@ -86,7 +88,7 @@ export class AuthHttpService {
   ): Observable<UserAuthData> {
     return this.httpClient
       .post<BaseResponseModel>(
-        JOB_SEEKER_REGISTER_ENDPOINT,
+        RECRUITER_REGISTER_ENDPOINT,
         registerAuthRequest,
         {
           headers: {

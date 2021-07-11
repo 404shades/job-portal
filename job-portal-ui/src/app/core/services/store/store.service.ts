@@ -42,6 +42,6 @@ export class StoreService {
     this.store.dispatch(new fromStore.RefreshJobSeekerToken(accessToken))
   }
   refreshRecruiterToken(accessToken:string){
-    this.store.dispatch(new fromStore.RefreshJobSeekerToken(accessToken))
+    this.store.dispatch(new fromStore.RefreshRecruiterToken(accessToken))
   }
 }

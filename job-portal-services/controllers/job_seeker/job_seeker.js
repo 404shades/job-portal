@@ -68,13 +68,18 @@ exports.signInJobSeeker = async (request, response, next) => {
 
 exports.signInJobSeekerThroughToken = async (request, response, next) => {
   try {
-    const jobSeekerDetails = { request };
+    const {jobSeekerDetails} =  request ;
+    const token = jwt.sign(
+      { id: jobSeekerDetails.id },
+      environment.JSON_WEB_TOKEN_PASSWORD,
+      { expiresIn: 864000 }
+    );
     return response
       .status(200)
       .json(
-        { userData: jobSeekerDetails, isRecruiter: false, accessToken: token },
+       apiResponse({ userData: jobSeekerDetails, isRecruiter: false, accessToken: token },
         response.statusCode,
-        "Welcome!!!"
+        "Welcome!!!")
       );
   } catch (e) {
     next(e);

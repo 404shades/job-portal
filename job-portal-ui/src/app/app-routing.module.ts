@@ -25,6 +25,15 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'recruiters',
+    canActivate:[AuthenticationGuard],
+    loadChildren: () =>
+      import('./modules/recruiters-panel/recruiter.module').then(
+        (m) => m.RecruiterModule
+      ),
+    pathMatch: 'full',
+  },
+  {
     path: '',
     redirectTo: '/jobs',
     pathMatch: 'full',

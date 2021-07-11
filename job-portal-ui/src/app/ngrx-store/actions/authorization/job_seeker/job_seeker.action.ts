@@ -76,7 +76,9 @@ export class RefreshJobSeekerTokenFail implements Action,LoadingAction {
   jobPortalLoading = {remove : REFRESH_JOB_SEEKER_TOKEN}
 
   readonly type = REFRESH_JOB_SEEKER_TOKEN_FAIL;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {
+    
+   }
 }
 
 

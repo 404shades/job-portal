@@ -43,13 +43,18 @@ exports.registerRecruiter = async (request, response, next) => {
 exports.signInRecruiterThroughToken = async (request,response,next)=>{
   try{
     const {recruiterDetails} = request;
+    const token = jwt.sign(
+      { id: recruiterDetails.id },
+      environment.JSON_WEB_TOKEN_PASSWORD,
+      { expiresIn: 864000 }
+    );
     return response
       .status(201)
       .json(
         apiResponse(
           { userData: recruiterDetails, isRecruiter:true,accessToken: token },
           response.statusCode,
-          "Company Profile created successfully"
+          "Welcome!!"
         )
       );
   }catch(e){

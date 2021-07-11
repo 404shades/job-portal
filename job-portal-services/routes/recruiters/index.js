@@ -8,6 +8,6 @@ const router = express.Router();
 router.post("/register", recruiterController.registerRecruiter);
 
 router.post("/login",recruiterController.signInRecruiter);
-router.post("/loginThroughToken",jwtAuthMiddleware,isRecruiterMiddleware,recruiterController.signInRecruiter)
+router.post("/loginThroughToken",jwtAuthMiddleware,isRecruiterMiddleware,recruiterController.signInRecruiterThroughToken)
 
 module.exports = router;

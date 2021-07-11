@@ -16,18 +16,30 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="isRecruiter$|async">
+          <a class="nav-link active" aria-current="page">Welcome Recruiter</a>
+        </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page">Home</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/jobs" aria-current="page">Home</a>
         </li>
         <li class="nav-item" >
-          <a class="nav-link">View All Jobs</a>
+          <a class="nav-link" routerLinkActive="active">View All Jobs</a>
         </li>
         
         <li class="nav-item" *ngIf="!(isLoggedIn$|async)">
-          <a class="nav-link" routerLink="/register">Register</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/register">Register</a>
         </li>
         <li class="nav-item" *ngIf="!(isLoggedIn$|async)">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/login">Login</a>
+        </li>
+        
+
+        <li class="nav-item" *ngIf="(isRecruiter$|async)">
+          <a class="nav-link" routerLinkActive="active" routerLink="/recruiters/publishJob">Publish Jobs</a>
+        </li>
+
+        <li class="nav-item" *ngIf="(isLoggedIn$|async)">
+          <a class="nav-link" (click)="logoutUser()">Logout</a>
         </li>
       </ul>
     </div>
