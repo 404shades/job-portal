@@ -36,12 +36,12 @@ export class LoginComponent implements OnInit {
   }
 
   loginAsJobSeeker(data:{email:string,password:string}){
-    this.storeService.loginAsJobSeeker(data,false)
+    this.storeService.loginAsJobSeeker(data,true)
 
   }
 
   loginAsRecruiter(data:{email:string,password:string}){
-    this.storeService.loginAsRecruiter(data,false)
+    this.storeService.loginAsRecruiter(data,true)
   }
 
 }
