@@ -1,0 +1,15 @@
+.brand-logo{
+    max-width: 50;
+}
+.head-btn2 {
+	background: none;
+	border: 1px solid #fb246a;
+	color: #fb246a;
+
+	&::before{
+		color: #fff !important;	
+	}
+	&:hover{
+		color: #fff;
+	}
+}

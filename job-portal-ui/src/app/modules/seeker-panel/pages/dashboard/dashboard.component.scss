@@ -1,0 +1,37 @@
+.main-banner {
+  background-size: cover !important;
+  background-position: center !important;
+  padding: 14% 0;
+  position: relative;
+  text-align: center;
+  color: #ffffff;
+  margin: 0;
+}
+.main-banner .caption {
+  position: relative;
+}
+.main-banner h2 {
+  color: #ffffff;
+  font-weight: 400;
+  display: block;
+  margin-bottom: 25px;
+  font-size: 3.2rem
+}
+.main-banner:before {
+  content: "";
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background: rgba(12, 20, 25, 0.3);
+}
+
+::ng-deep {
+  .mat-form-field .mat-form-field-flex{
+    background-color: white; 
+    border-radius: 12px;
+    color: black;
+  }
+}
