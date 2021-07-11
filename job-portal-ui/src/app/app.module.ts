@@ -8,7 +8,9 @@ import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreModule } from './core/core.module';
+import { getBaseUrl } from './core/providers/base_url';
+import { reducers,metaReducers } from './ngrx-store';
+import { LoadingModule } from './modules/loading';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,16 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    LoadingModule,
     EffectsModule.forRoot([]),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: "BASE_API_URL", useFactory: getBaseUrl, deps: [] },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

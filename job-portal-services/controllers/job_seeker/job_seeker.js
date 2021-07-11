@@ -22,7 +22,7 @@ exports.registerJobSeeker = async (request, response, next) => {
       .status(201)
       .json(
         apiResponse(
-          { jobSeeker, accessToken: token },
+          { jobSeeker,isRecruiter:false, accessToken: token },
           "User Registered Successfully"
         )
       );
@@ -54,7 +54,7 @@ exports.signInJobSeeker = async (request, response, next) => {
         .status(200)
         .json(
           apiResponse(
-            { jobSeeker, accessToken: token },
+            { jobSeeker,isRecruiter:false, accessToken: token },
             response.statusCode,
             "Welcome!!!"
           )

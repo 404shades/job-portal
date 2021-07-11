@@ -26,6 +26,7 @@
     "bootstrap": "^5.0.2",
     "compass-mixins": "^0.12.10",
     "jquery": "^3.6.0",
+    "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"

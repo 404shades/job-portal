@@ -29,7 +29,7 @@ exports.registerRecruiter = async (request, response, next) => {
       .status(201)
       .json(
         apiResponse(
-          { recruiter, accessToken: token },
+          { recruiter, isRecruiter:true,accessToken: token },
           response.statusCode,
           "Company Profile created successfully"
         )
@@ -56,7 +56,7 @@ exports.signInRecruiter = async (request, response, next) => {
             environment.JSON_WEB_TOKEN_PASSWORD,
             { expiresIn: 864000 }
           );
-        return response.status(200).json(apiResponse({recruiter,accessToken:token},response.statusCode,"Welcome!!!"))
+        return response.status(200).json(apiResponse({recruiter,isRecruiter:true,accessToken:token},response.statusCode,"Welcome!!!"))
     }
   } catch (e) {
     next(create_error("Wrong Credentials", 403));
