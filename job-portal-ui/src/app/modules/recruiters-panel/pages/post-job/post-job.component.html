@@ -1,1 +1,27 @@
-<p>post-job works!</p>
+<app-header></app-header>
+<h2 class="text-center py-3">Publish Jobs</h2>
+<mat-card class="login-box">
+  <mat-card-content> 
+      <form [formGroup]="jobFormGroup">
+          <mat-form-field>
+              <mat-label>Choose One Category</mat-label>
+              <mat-select formControlName="JobCategoryId">
+                  <mat-option *ngFor="let category of allCategories|async" [value]="category.id">{{category.category_name}}</mat-option>
+              </mat-select>
+              <mat-error>Please choose a Job Category</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <mat-label>Job Title</mat-label>
+              <input matInput placeholder="Enter Job Title" formControlName="job_title">
+              <mat-error>Please input valid Job Title</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <mat-label>Job Description</mat-label>
+              <textarea matInput placeholder="Enter Job Descriptiion (Minimum 10 characters)" rows="5" formControlName="job_description"></textarea>
+              <mat-error>Please input valid Job Descriptiond</mat-error>
+            
+          </mat-form-field>
+          <button [disabled]="!jobFormGroup.valid" class="button-block" mat-raised-button color="primary" (click)="publishJob()">Publish Job</button>
+      </form>
+  </mat-card-content>
+</mat-card>

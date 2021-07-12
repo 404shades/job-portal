@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { getLoadingData } from 'src/app/modules/loading';
 import * as fromStore from '../../../ngrx-store';
+import { JobCreateRequest } from '../../data-models/job-apply-request/job_apply_request.model';
 
 
 
@@ -43,5 +44,9 @@ export class StoreService {
   }
   refreshRecruiterToken(accessToken:string){
     this.store.dispatch(new fromStore.RefreshRecruiterToken(accessToken))
+  }
+
+  createNewJobByRecruiter(jobRequest:JobCreateRequest){
+    this.store.dispatch(new fromStore.CreateNewJobByRecruiter(jobRequest))
   }
 }

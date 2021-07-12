@@ -22,7 +22,6 @@ const routes: Routes = [
       import('./modules/seeker-panel/seeker.module').then(
         (m) => m.JobSeekerModule
       ),
-    pathMatch: 'full',
   },
   {
     path: 'recruiters',
@@ -31,7 +30,6 @@ const routes: Routes = [
       import('./modules/recruiters-panel/recruiter.module').then(
         (m) => m.RecruiterModule
       ),
-    pathMatch: 'full',
   },
   {
     path: '',
