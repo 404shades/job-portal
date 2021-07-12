@@ -1,5 +1,7 @@
 const Jobs = require("../../models").sequelize.models.Jobs;
 const Recruiter = require("../../models").sequelize.models.Recruiter;
+const { Op } = require('sequelize')
+
 const RecruiterProfile =
   require("../../models").sequelize.models.RecruiterProfile;
   const JobCategory = require("../../models").sequelize.models.JobCategory;
@@ -25,6 +27,31 @@ const JobsRepository = {
       where:{is_active:true}
     });
   },
+  searchJobsByNameDescription: async function(searchTerm){
+      return await Jobs.findAll({
+          where:{
+              [Op.or]:['job_title','job_description'].map(values=>({
+                  [values]:{
+                      [Op.like]:`%${searchTerm}`
+                  }
+              })),
+              is_active:true
+          },
+          include: [
+            {
+              model: Recruiter,
+              include: [
+                {
+                  model: RecruiterProfile,
+                },
+              ],
+            },
+            {
+                model:JobCategory
+            }
+          ],
+      })
+  }
 };
 
 module.exports = JobsRepository;

@@ -26,7 +26,13 @@ exports.createJob = async (request, response, next) => {
 
 exports.getAllJobs = async (request, response, next) => {
   try {
-    const allJobs = await JobRepository.getAllJobs();
+    let allJobs;
+    const { searchTerm } = request.query;
+    if (searchTerm) {
+      allJobs = await JobRepository.searchJobsByNameDescription(searchTerm)
+    } else {
+      allJobs = await JobRepository.getAllJobs();
+    }
     return response.json(apiResponse(allJobs, response.statusCode));
   } catch (err) {
     next(err);

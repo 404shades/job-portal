@@ -7,28 +7,16 @@
   <div class="container">
     <div class="caption">
       <h2>Build Your Career</h2>
-      <div class="card">
-        <div class="card-body"> <form>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-5">
-                <mat-form-field appearance="fill">
-                  <input matInput type="text" placeholder="Enter Job title" />
-                </mat-form-field>
-              </div>
-              <div class="col-md-5">
-                <mat-form-field appearance="fill">
-                  <input matInput type="text" placeholder="Location" />
-                </mat-form-field>
-              </div>
-              <div class="col-md-2">
-                  <button mat-button color="primary">Find Jobs</button>
-              </div>
-            </div>
-          </div>
-        </form>
-        </div>
-      </div>
+      <mat-card class="search-form">
+        <mat-card-content>
+          <mat-form-field>
+            <mat-label>Search for Jobs (Search By Recruiter Name, Job Title, Job Description)</mat-label>
+            <input [(ngModel)]="searchTerm" matInput placeholder="Search By Recruiter Name, Title, Keywords">
+          </mat-form-field>
+          <button mat-raised-button color="primary" [routerLink]="['/jobs/allJobs']" [queryParams]="{searchTerm:searchTerm}">Search</button>
+
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </section>

@@ -39,7 +39,7 @@ export class JobEffects {
         fromJobActions.GET_ALL_AVAILABLE_JOBS
       ),
       mergeMap((action) => {
-        return this.jobHttpService.getAvailableJobs().pipe(
+        return this.jobHttpService.getAvailableJobs(action.searchTerm).pipe(
           map((data) => new fromJobActions.GetAllAvailableJobsSuccess(data)),
           catchError((err) =>
             of(new fromJobActions.GetAllAvailableJobsFail(err))

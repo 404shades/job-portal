@@ -12,6 +12,7 @@ import { JobServiceDataModel } from 'src/app/modules/recruiters-panel/data/job-s
 export class DashboardComponent implements OnInit {
 
   constructor(private storeService:StoreService) { }
+  searchTerm:string='';
 
   availableJobServices:Observable<CategoryData[]>|undefined
 

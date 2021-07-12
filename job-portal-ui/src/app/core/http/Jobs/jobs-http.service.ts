@@ -23,9 +23,11 @@ export class JobsHttpService {
       .pipe(map((data) => data.response));
   }
 
-  getAvailableJobs(): Observable<JobsAvailableData[]> {
+  getAvailableJobs(searchTerm:string|undefined): Observable<JobsAvailableData[]> {
     return this.httpClient
-      .get<BaseResponseModel>(AVAILABLE_JOBS_ENDPOINT)
+      .get<BaseResponseModel>(AVAILABLE_JOBS_ENDPOINT,{params:{
+        'searchTerm':searchTerm?searchTerm:''
+      }})
       .pipe(map((data) => data.response as JobsAvailableData[]));
   }
 

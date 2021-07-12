@@ -36,7 +36,7 @@ export const GET_ALL_AVAILABLE_JOBS_FAIL = 'GET_ALL_AVAILABLE_JOBS FAIL';
 
 export class GetAllAvailableJobs implements Action {
   readonly type = GET_ALL_AVAILABLE_JOBS;
-  constructor() {}
+  constructor(public searchTerm:string|undefined) {}
 }
 
 export class GetAllAvailableJobsSuccess implements Action {

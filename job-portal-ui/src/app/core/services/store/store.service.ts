@@ -28,8 +28,8 @@ export class StoreService {
     this.store.dispatch(new fromStore.GetAllAvailableJobCategories())
   }
 
-  getAllAvailableJobs(){
-    this.store.dispatch(new fromStore.GetAllAvailableJobs())
+  getAllAvailableJobs(searchTerm:string|undefined){
+    this.store.dispatch(new fromStore.GetAllAvailableJobs(searchTerm))
   }
 
   loginAsRecruiter(authData:{email:string,password:string},shouldRedirect:boolean){

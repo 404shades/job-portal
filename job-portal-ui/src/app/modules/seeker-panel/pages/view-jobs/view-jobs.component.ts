@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JobsAvailableData } from 'src/app/core/data-models/jobs-available/jobs-available.data';
 import { StoreService } from 'src/app/core/services/store/store.service';
@@ -10,13 +11,16 @@ import { StoreService } from 'src/app/core/services/store/store.service';
 })
 export class ViewJobsComponent implements OnInit {
 
-  constructor(private storeService:StoreService) { }
+  constructor(private storeService:StoreService,private route:ActivatedRoute) { }
 
   allJobs:Observable<JobsAvailableData[]>|undefined;
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((data)=>{
+      this.storeService.getAllAvailableJobs(data['searchTerm'])
+    })
     this.allJobs = this.storeService.availableJobs$;
-    this.storeService.getAllAvailableJobs()
+    
   }
 
 }
