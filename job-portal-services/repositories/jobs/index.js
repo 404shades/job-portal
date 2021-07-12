@@ -30,7 +30,7 @@ const JobsRepository = {
   searchJobsByNameDescription: async function(searchTerm){
       return await Jobs.findAll({
           where:{
-              [Op.or]:['job_title','job_description'].map(values=>({
+              [Op.or]:['job_title','job_description','$Recruiter.recuiter_name$','$Recruiter.company_name$'].map(values=>({
                   [values]:{
                       [Op.iLike]:`%${searchTerm}%`
                   }
@@ -40,6 +40,7 @@ const JobsRepository = {
           include: [
             {
               model: Recruiter,
+              as:'Recruiter',
               include: [
                 {
                   model: RecruiterProfile,
