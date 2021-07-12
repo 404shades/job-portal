@@ -32,7 +32,7 @@ const JobsRepository = {
           where:{
               [Op.or]:['job_title','job_description'].map(values=>({
                   [values]:{
-                      [Op.like]:`%${searchTerm}`
+                      [Op.iLike]:`%${searchTerm}%`
                   }
               })),
               is_active:true
