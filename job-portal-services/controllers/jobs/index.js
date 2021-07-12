@@ -1,5 +1,6 @@
 const { apiResponse } = require("../../utils/response_api");
 const JobRepository = require("../../repositories/jobs");
+const JobApplicationsRepository = require("../../repositories/job-applications")
 exports.createJob = async (request, response, next) => {
   try {
     const { job_description, job_title, last_date_to_apply, JobCategoryId } =
@@ -37,4 +38,16 @@ exports.getAllJobs = async (request, response, next) => {
   } catch (err) {
     next(err);
   }
+
+  
 };
+
+exports.getJobApplicantsByJobId = async (request,response,next)=>{
+  try{
+    const { id } = request;
+    const allApplicants = await JobApplicationsRepository.getJobApplicantsByRecruiterId(id)
+    return response.json(apiResponse(allApplicants,response.statusCode))
+  }catch(e){
+    next(e)
+  }
+}

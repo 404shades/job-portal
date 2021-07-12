@@ -1,0 +1,18 @@
+<div class="job-card" *ngIf="jobApplications && jobApplications.length>0">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{jobApplications[0].Job?.job_title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Job Description : {{jobApplications[0].Job?.job_description}}</p>
+            <p>Last Date To Apply : {{jobApplications[0].Job?.last_date_to_apply|date}}</p>
+            <h4>Applicants to this JOB</h4>
+            <ul>
+                <li *ngFor="let applicant of jobApplications">
+                    {{applicant.JobSeeker?.full_name}} - {{applicant.JobSeeker?.email}}
+                </li>
+            </ul>
+        </mat-card-content>
+        
+    </mat-card>
+    </div>

@@ -5,9 +5,11 @@ import { map } from 'rxjs/operators';
 import {
   APPLY_TO_JOB_ENDPOINT,
   AVAILABLE_JOBS_ENDPOINT,
+  GET_JOB_APPLICATIONS,
   RECRUITER_CREATE_JOB,
 } from '../../constants';
 import { BaseResponseModel } from '../../data-models/base_response.model';
+import { JobApplications } from '../../data-models/job-applications/job-applications.model';
 import { JobCreateRequest } from '../../data-models/job-apply-request/job_apply_request.model';
 import { JobsAvailableData } from '../../data-models/jobs-available/jobs-available.data';
 
@@ -35,5 +37,11 @@ export class JobsHttpService {
     return this.httpClient
       .post<BaseResponseModel>(APPLY_TO_JOB_ENDPOINT, { JobId: jobId })
       .pipe(map((data) => data.response));
+  }
+
+  getJobApplications():Observable<JobApplications[]>{
+    return this.httpClient.get<BaseResponseModel>(GET_JOB_APPLICATIONS).pipe(
+      map((data)=>data.response as JobApplications[])
+    )
   }
 }
