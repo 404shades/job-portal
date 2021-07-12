@@ -27,14 +27,14 @@ export class AuthenticationGuard implements CanActivate {
     const recruiterStatus = localStorage.getItem(RECRUITER_STATUS) === 'true';
     const accessToken = localStorage.getItem(JWT_LOCAL_STORAGE);
     if (!accessToken) {
-      this.authorizationService.logoutUser();
+      this.authorizationService.logoutUser(state.url);
       return false;
     }
 
     return this.getUserAuthenticationState(recruiterStatus,accessToken).pipe(
       switchMap(() => of(true)),
       catchError(() => {
-        this.authorizationService.logoutUser();
+        this.authorizationService.logoutUser(state.url);
         return of(false);
       })
     );

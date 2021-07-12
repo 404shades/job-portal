@@ -18,7 +18,6 @@ const routes: Routes = [
   },
   {
     path: 'jobs',
-    canActivate:[AuthenticationGuard],
     loadChildren: () =>
       import('./modules/seeker-panel/seeker.module').then(
         (m) => m.JobSeekerModule

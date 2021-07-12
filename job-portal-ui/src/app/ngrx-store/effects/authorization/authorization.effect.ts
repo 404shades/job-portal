@@ -17,13 +17,17 @@ import { RegisterJobSeekerRequest } from 'src/app/core/data-models/RegisterAuthR
 
 @Injectable()
 export class AuthorizationEffetcs {
+
+
   constructor(
     private actions$: Actions,
     private authorizationService: AuthorizationService,
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog
-  ) {}
+  ) {
+    
+  }
 
   loginAsJobSeeker$ = createEffect(() =>
     this.actions$.pipe(
@@ -158,7 +162,8 @@ export class AuthorizationEffetcs {
 
           }
           if (data.shouldRedirect) {
-            this.router.navigate(['/jobs'], { replaceUrl: true });
+            let returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/jobs';
+            this.router.navigateByUrl(returnUrl,{replaceUrl:true})
           }
         })
       ),
@@ -177,7 +182,8 @@ export class AuthorizationEffetcs {
             localStorage.setItem(RECRUITER_STATUS,`${data.payload.isRecruiter}`)
           }
           if (data.shouldRedirect) {
-            this.router.navigate(['/jobs'], { replaceUrl: true });
+            let returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/jobs';
+            this.router.navigateByUrl(returnUrl,{replaceUrl:true})
           }
         })
       ),
@@ -195,8 +201,8 @@ export class AuthorizationEffetcs {
             localStorage.setItem(JWT_LOCAL_STORAGE, data.payload.accessToken);
             localStorage.setItem(RECRUITER_STATUS,`${data.payload.isRecruiter}`)
           }
-
-          this.router.navigate(['/jobs'], { replaceUrl: true });
+          let returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/jobs';
+          this.router.navigateByUrl(returnUrl,{replaceUrl:true})
         })
       ),
     { dispatch: false }
@@ -213,8 +219,8 @@ export class AuthorizationEffetcs {
             localStorage.setItem(RECRUITER_STATUS,`${data.payload.isRecruiter}`)
 
           }
-
-          this.router.navigate(['/jobs'], { replaceUrl: true });
+          let returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/jobs';
+          this.router.navigateByUrl(returnUrl,{replaceUrl:true})
         })
       ),
     { dispatch: false }
