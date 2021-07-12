@@ -1,0 +1,17 @@
+<div class="job-card">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{jobData?.job_title}}</mat-card-title>
+            <mat-card-subtitle>Company : {{jobData?.Recruiter?.company_name}}</mat-card-subtitle>
+            <mat-card-subtitle>Category : {{jobData?.JobCategory?.category_name}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Job Description : {{jobData?.job_description}}</p>
+            <p>Last Date To Apply : {{jobData?.last_date_to_apply|date}}</p>
+        </mat-card-content>
+        <mat-card-actions >
+            <button (click)="applyToJob()" *ngIf="!(isRecruiter$|async)" mat-button color="primary">Apply to this Job</button>
+            <button *ngIf="(isRecruiter$|async) && (isMyPostedJobs|async)" mat-button color="primary">Make this inactive</button>
+        </mat-card-actions>
+    </mat-card>
+    </div>

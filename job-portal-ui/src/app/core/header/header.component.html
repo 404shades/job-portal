@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
   <div class="container">
-    <a class="navbar-brand">
+    <a class="navbar-brand" routerLink="/jobs">
       <img src="assets/images/logo.svg" alt="" width="100" />
     </a>
     <button
@@ -23,7 +23,7 @@
           <a class="nav-link" routerLinkActive="active" routerLink="/jobs" aria-current="page">Home</a>
         </li>
         <li class="nav-item" >
-          <a class="nav-link" routerLinkActive="active">View All Jobs</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/jobs/allJobs">View All Jobs</a>
         </li>
         
         <li class="nav-item" *ngIf="!(isLoggedIn$|async)">

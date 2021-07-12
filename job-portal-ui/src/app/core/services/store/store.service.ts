@@ -22,8 +22,14 @@ export class StoreService {
 
   isLoading$ = this.store.pipe(select(getLoadingData)).pipe((map((data)=>data && data.length>0)))
 
+  availableJobs$ = this.store.select(fromStore.getAvailableJobs);
+
   getAllCategorires(){
     this.store.dispatch(new fromStore.GetAllAvailableJobCategories())
+  }
+
+  getAllAvailableJobs(){
+    this.store.dispatch(new fromStore.GetAllAvailableJobs())
   }
 
   loginAsRecruiter(authData:{email:string,password:string},shouldRedirect:boolean){
@@ -48,5 +54,9 @@ export class StoreService {
 
   createNewJobByRecruiter(jobRequest:JobCreateRequest){
     this.store.dispatch(new fromStore.CreateNewJobByRecruiter(jobRequest))
+  }
+
+  applyToAJob(jobId:string){
+    this.store.dispatch(new fromStore.ApplyToJobBySeeker(jobId));
   }
 }

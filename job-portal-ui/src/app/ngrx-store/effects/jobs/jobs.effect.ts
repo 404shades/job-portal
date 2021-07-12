@@ -32,4 +32,38 @@ export class JobEffects {
       })
     )
   );
+
+  getAllAvailableJobs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromJobActions.GetAllAvailableJobs>(
+        fromJobActions.GET_ALL_AVAILABLE_JOBS
+      ),
+      mergeMap((action) => {
+        return this.jobHttpService.getAvailableJobs().pipe(
+          map((data) => new fromJobActions.GetAllAvailableJobsSuccess(data)),
+          catchError((err) =>
+            of(new fromJobActions.GetAllAvailableJobsFail(err))
+          )
+        );
+      })
+    )
+  );
+
+  applyToAJobBySeeker$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromJobActions.ApplyToJobBySeeker>(
+        fromJobActions.APPLY_TO_A_JOB_BY_SEEKER
+      ),
+      mergeMap((action) => {
+        return this.jobHttpService.applyToAJob(action.jobId).pipe(
+          map((data) => new fromJobActions.ApplyToJobBySeekerSuccess(data)),
+          catchError((err) =>
+            of(new fromJobActions.ApplyToJobBySeekerFail(err))
+          )
+        );
+      })
+    )
+  );
+
+
 }

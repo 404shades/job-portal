@@ -24,7 +24,7 @@ export function jobCategoryReducer(
       };
 
     default:
-      return initialState;
+      return state;
   }
 }
 

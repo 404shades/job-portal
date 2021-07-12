@@ -6,3 +6,4 @@ export const JOB_SEEKER_REGISTER_ENDPOINT = "jobSeeker/register";
 export const JOB_SEEKER_REFRESH_TOKEN = "jobSeeker/loginThroughToken";
 export const RECRUITER_REFRESH_TOKEN = "recruiter/loginThroughToken";
 export const RECRUITER_CREATE_JOB = "jobs/createJob";
+export const APPLY_TO_JOB_ENDPOINT = "jobSeeker/applyJob";

@@ -6,9 +6,11 @@ import { JobSeekerRoutingModule } from './seeker-routing.module';
 import { StatlessServiceComponent } from './components/statless-service/statless-service.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ViewJobsComponent } from './pages/view-jobs/view-jobs.component';
+import { StatlessJobComponent } from './components/statless-job/statless-job.component';
 
 @NgModule({
-  declarations: [DashboardComponent, StatlessServiceComponent,],
+  declarations: [DashboardComponent, StatlessServiceComponent, ViewJobsComponent, StatlessJobComponent,],
   imports: [JobSeekerRoutingModule, CoreModule, AngularMaterialModule,CommonModule,SharedModule],
   providers: [],
 })
