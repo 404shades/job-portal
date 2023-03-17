@@ -480,3 +480,106 @@ Copy code
 aws batch submit-job --job-name ec2-query --job-queue my-job-queue --job-definition my-job-definition \
     --container-overrides 'command=["python", "main.py", "--resource-type", "ec2", "--output-path", "s3://my-bucket/ec2-instances.csv"]'
   ```
+  
+  
+ Yes, you can apply SOLID principles and design patterns to make your code more maintainable and scalable. Here's an example of how you could use the factory pattern to create resource-specific clients that follow the single responsibility principle:
+
+main.py: This is the entry point for your AWS Batch job. It should create a resource client using the ResourceClientFactory and call its get_resources() method
+
+```python
+import argparse
+import csv
+from resource_client_factory import ResourceClientFactory
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--resource-type', required=True, help='Type of AWS resource to query')
+parser.add_argument('--output-path', required=True, help='Path to output CSV file')
+args = parser.parse_args()
+
+factory = ResourceClientFactory()
+client = factory.create_client(args.resource_type)
+resources = client.get_resources()
+
+with open(args.output_path, 'w', newline='') as csvfile:
+    fieldnames = resources[0].keys()
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(resources)
+```
+
+2. resource_client_factory.py: This module contains the ResourceClientFactory class that creates resource-specific clients based on the resource type.
+```python
+import boto3
+
+from ec2_client import EC2Client
+from rds_client import RDSClient
+
+class ResourceClientFactory:
+    def create_client(self, resource_type):
+        if resource_type == 'ec2':
+            ec2 = boto3.client('ec2')
+            return EC2Client(ec2)
+        elif resource_type == 'rds':
+            rds = boto3.client('rds')
+            return RDSClient(rds)
+        else:
+            raise ValueError(f'Invalid resource type: {resource_type}')
+```
+3.resource_client.py: This module contains the ResourceClient abstract class that defines the interface for resource-specific clients.
+```python
+from abc import ABC, abstractmethod
+
+class ResourceClient(ABC):
+    @abstractmethod
+    def get_resources(self):
+        pass
+
+```
+4. ec2_client.py: This module contains the EC2Client class that implements the ResourceClient interface for EC2 instances.
+```python
+from resource_client import ResourceClient
+
+class EC2Client(ResourceClient):
+    def __init__(self, ec2):
+        self.ec2 = ec2
+
+    def get_resources(self):
+        response = self.ec2.describe_instances()
+        instances = []
+        for reservation in response['Reservations']:
+            for instance in reservation['Instances']:
+                instances.append({
+                    'InstanceId': instance['InstanceId'],
+                    'InstanceType': instance['InstanceType'],
+                    'LaunchTime': instance['LaunchTime'].strftime('%Y-%m-%d %H:%M:%S'),
+                    # Add more fields as needed
+                })
+        return instances
+```
+5. rds_client.py: This module contains the RDSClient class that implements the ResourceClient interface for RDS instances.
+```python
+from resource_client import ResourceClient
+
+class RDSClient(ResourceClient):
+    def __init__(self, rds):
+        self.rds = rds
+
+    def get_resources(self):
+        response = self.rds.describe_db_instances()
+        db_instances = []
+        for db_instance in response['DBInstances']:
+            db_instances.append({
+                'DBInstanceIdentifier': db_instance['DBInstanceIdentifier'],
+                'DBInstanceClass': db_instance['DBInstanceClass'],
+                'Engine': db_instance['Engine'],
+                # Add more fields as needed
+            })
+        return db_instances
+```
+6.This design allows you to add new resource types and clients easily without modifying the main.py script or existing clients. To add
+
+
+
+
+
+
