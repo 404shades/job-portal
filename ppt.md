@@ -258,3 +258,40 @@ The proposed solution can also improve the accuracy and reliability of the batch
 In addition, the use of the proposed solution can provide significant cost savings for the startup, enabling it to reinvest those savings into other areas of the business.
 The longer the startup waits to adopt the proposed solution, the more it risks falling behind its competitors, who may already be using more advanced and efficient approaches.
 Therefore, the need to act now is clear, as the proposed solution can provide significant benefits and help the startup stay competitive in the marketplace.
+
+
+also explain how without manual intervention we can run the job anytime. Like we can plan weekly/biweekly/quarterly without worrying about manual intervention because usually on each month end we spend 3-4 hours for running manual jobs in our day time. After orchestraation this can be done at night daily/weekly whatever is requirement
+Sure, here's a possible description for Slide 6:
+
+Slide 6: Scheduled and Automated Batch Job Processing
+
+Our proposed solution allows for scheduled and automated batch job processing, without the need for manual intervention.
+With the use of Step Functions to orchestrate the Lambda functions, the startup can easily define a schedule for the batch job, such as daily, weekly, biweekly, or quarterly, depending on the business needs.
+The startup can also define the time of day or night when the batch job should run, allowing for more flexibility and reducing the need for engineers to be available during manual processing times.
+By eliminating the need for manual intervention, the startup can reduce the risk of errors and increase the accuracy and reliability of the batch job results.
+The use of Terraform to manage the infrastructure for the Lambda functions and Step Function also allows for easy scaling of the batch job as needed, without the need for manual intervention or infrastructure management.
+Overall, our proposed solution can provide significant benefits in terms of scheduling, automation, accuracy, and scalability, enabling the startup to process the batch job more efficiently and effectively, without the need for manual intervention.
+
+
+Sure, here's a possible description for Slide 7:
+
+Slide 7: Reduced Dependence on Key Personnel
+
+Our proposed solution reduces the startup's dependence on key personnel to manually run and manage the batch job.
+With the use of automated and scheduled batch job processing, support engineers can monitor the batch job without the need for specific engineering knowledge or expertise.
+In the event that all engineers are on leave, the startup can still rely on the scheduled batch job processing to continue, ensuring that critical processes are not interrupted.
+By reducing the dependence on key personnel, the startup can also reduce the risk of errors and delays, and improve the overall resilience of its operations.
+The use of Terraform to manage the infrastructure and Step Function to orchestrate the batch job also provides a clear and easy-to-understand framework for other team members to follow, reducing the risk of confusion or errors when managing the batch job.
+Overall, our proposed solution enables the startup to reduce its dependence on specific individuals, and improve the overall reliability and resilience of its batch job processing.
+
+
+
+Sure, here's a possible description for Slide 8:
+
+Slide 8: Reduced Dependency on Specific Developers
+
+Our proposed solution reduces the startup's dependency on specific developers to manage and maintain the batch job.
+With the use of Terraform to manage the infrastructure and Step Function to orchestrate the batch job, the startup can create a clear and easy-to-understand framework for managing the batch job.
+This reduces the risk of confusion or errors when managing the batch job, and allows new developers to quickly understand and contribute to the batch job processing.
+In the event that specific developers leave the startup, the use of Terraform and Step Function ensures that the batch job processing remains accessible and maintainable for other team members.
+Overall, our proposed solution enables the startup to reduce its dependency on specific individuals, and improve the overall maintainability and scalability of its batch job processing.
