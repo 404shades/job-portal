@@ -1,0 +1,70 @@
+stages:
+  - validate
+  - package
+  - plan
+  - apply
+
+variables:
+  AWS_REGION: "us-west-2"
+  PACKAGE_DIR: "package"
+  VENV_DIR: "venv"
+
+before_script: &common_before_script
+  - cd terraform
+  - export TFE_TOKEN=$(aws secretsmanager get-secret-value --region $AWS_REGION --secret-id "/prod/TFE_TOKEN" --query "SecretString" --output text | jq -r '.API_KEY')
+  - export TFE_VAR_name=$(echo "lambda-$CI_ENVIRONMENT_NAME")
+  - echo "environment: $CI_ENVIRONMENT_NAME"
+
+.package_dependencies: &package_dependencies
+  image: python:3.8
+  script:
+    - python -m venv $VENV_DIR
+    - source $VENV_DIR/bin/activate
+    - pip install --upgrade pip
+    - pip install -r requirements.txt -t $PACKAGE_DIR
+    - cd $PACKAGE_DIR
+    - zip -r ../dependencies.zip .
+    - cd ..
+  artifacts:
+    paths:
+      - dependencies.zip
+  cache:
+    paths:
+      - $PACKAGE_DIR
+
+validate:
+  stage: validate
+  script:
+    - terraform init -backend=false
+    - terraform validate
+  parallel:
+    matrix:
+      - CI_ENVIRONMENT_NAME: ["test", "dev", "prod"]
+  before_script: *common_before_script
+
+package:
+  stage: package
+  <<: *package_dependencies
+
+plan:
+  stage: plan
+  script:
+    - terraform init
+    - terraform plan -out planfile -var "environment=$CI_ENVIRONMENT_NAME" -var "name=$TFE_VAR_name"
+  needs: ["package"]
+  parallel:
+    matrix:
+      - CI_ENVIRONMENT_NAME: ["test", "dev", "prod"]
+  before_script: *common_before_script
+
+apply:
+  stage: apply
+  script:
+    - terraform init
+    - terraform apply -auto-approve -input=false planfile
+  needs: ["plan"]
+  when: manual
+  parallel:
+    matrix:
+      - CI_ENVIRONMENT_NAME: ["test", "dev", "prod"]
+  before_script: *common_before_script
